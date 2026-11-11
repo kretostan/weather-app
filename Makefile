@@ -1,23 +1,23 @@
 dev-up:
-	podman compose -p weather-app-dev -f compose.dev.yml --env-file .env.development up --build -d
+	podman compose -p weather-app-dev -f containers/compose.dev.yaml up --build -d
 
 dev-start:
-	podman compose -p weather-app-dev -f compose.dev.yml --env-file .env.development up --build -d
+	podman compose -p weather-app-dev -f containers/compose.dev.yaml up --build -d
 
 dev-stop:
-	podman compose -p weather-app-dev stop
+	podman compose -p weather-app-dev -f containers/compose.dev.yaml stop
 
 dev-down:
-	podman compose -p weather-app-dev -f compose.dev.yml down
+	podman compose -p weather-app-dev -f containers/compose.dev.yaml down
 
 prod-up:
-	podman compose -p weather-app-prod -f compose.prod.yml --env-file .env up --build -d
+	podman compose -p weather-app-prod -f containers/compose.yaml up --build -d
 
 prod-start:
-	podman compose -p weather-app-prod -f compose.prod.yml --env-file .env up --build -d
+	podman compose -p weather-app-prod -f containers/compose.yaml up --build -d
 
 prod-stop:
-	podman compose -p weather-app-prod stop
+	podman compose -p weather-app-prod -f containers/compose.yaml stop
 
 prod-down:
-	podman compose -p weather-app-prod -f compose.prod.yml down
+	podman compose -p weather-app-prod -f containers/compose.yaml down

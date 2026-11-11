@@ -7,11 +7,7 @@ const PORT = Number(process.env.PORT) || 3001;
 
 const app = express();
 
-const whitelist = [
-	String(process.env.APP_URL),
-	"http://localhost:80",
-	"http://localhost:5173",
-];
+const whitelist = ["http://localhost:8080", "http://localhost:5173"];
 app.use(
 	cors({
 		origin: (origin, callback) => {
@@ -23,9 +19,9 @@ app.use(
 );
 app.use(express.json());
 
-app.use(weatherRoutes);
+app.use("/api/weather/", weatherRoutes);
 
-app.get("/health", (_req, res) => res.status(200).json({ status: "OK" }));
+app.get("/api/health", (_req, res) => res.status(200).json({ status: "OK" }));
 
 app.listen(PORT, "0.0.0.0", () => {
 	console.log(`Listening on port: ${PORT}`);

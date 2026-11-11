@@ -2,7 +2,7 @@ import { Router } from "express";
 
 import { fetchWeather } from "../controllers/weather";
 
-const router = Router();
+const router: Router = Router();
 
 router.post("/current", fetchWeather);
 

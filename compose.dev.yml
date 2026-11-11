@@ -1,9 +1,9 @@
 services:
   backend:
     build:
-      context: ./backend
+      context: .
+      dockerfile: ./backend/Dockerfile
       target: dev
-    command: yarn dev
     ports:
       - "${BACKEND_PORT:-3001}:3001"
     env_file:
@@ -12,17 +12,17 @@ services:
       - NODE_ENV=${NODE_ENV:-development}
       - PORT=${BACKEND_PORT:-3001}
     volumes:
-      - ./backend:/app
-      - /app/node_modules
+      - ./backend:/app/backend
+      - /app/backend/node_modules
     healthcheck:
       test: ["CMD-SHELL", "exit 0"]
       disable: true
 
   frontend:
     build:
-      context: ./frontend
+      context: .
+      dockerfile: ./frontend/Dockerfile
       target: dev
-    command: yarn dev --host 0.0.0.0 --port 5173
     ports:
       - "${FRONTEND_PORT:-5173}:5173"
     env_file:
@@ -31,7 +31,7 @@ services:
       - NODE_ENV=${NODE_ENV:-development}
       - CHOKIDAR_USEPOLLING=true
     volumes:
-      - ./frontend:/app
-      - /app/node_modules
+      - ./frontend:/app/frontend
+      - /app/frontend/node_modules
     depends_on:
       - backend

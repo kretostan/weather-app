@@ -1,5 +1,3 @@
-gitignore uniwersalny
-
 # Node
 node_modules/
 npm-debug.log
@@ -13,9 +11,8 @@ build/
 coverage/
 
 # Environment
-.env
-.env.local
-.env.test
+.env*
+!.env.example
 
 # Vite
 *.local

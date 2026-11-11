@@ -1,9 +1,9 @@
 services:
   backend:
     build:
-      context: ./backend
+      context: .
+      dockerfile: ./backend/Dockerfile
       target: prod
-    command: yarn start
     environment:
       - NODE_ENV=production
       - PORT=3005
@@ -20,7 +20,8 @@ services:
 
   frontend:
     build:
-      context: ./frontend
+      context: .
+      dockerfile: ./frontend/Dockerfile
       target: prod
     ports:
       - "80:80"

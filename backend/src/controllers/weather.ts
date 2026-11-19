@@ -25,7 +25,6 @@ export const fetchWeather = async (
 		};
 		return res.json(weatherData);
 	} catch (error) {
-		// TODO: Error handling
 		console.error(error);
 		return res.status(500).json({
 			error: "An error occurred while fetching weather data",

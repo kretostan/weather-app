@@ -7,7 +7,11 @@ const PORT = Number(process.env.PORT) || 3001;
 
 const app = express();
 
-const whitelist = ["http://localhost:8080", "http://localhost:5173"];
+const whitelist = [
+	"http://localhost:8080",
+	"http://localhost:5173",
+	"https://weather.kretostan.com",
+];
 app.use(
 	cors({
 		origin: (origin, callback) => {

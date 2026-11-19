@@ -21,6 +21,10 @@ services:
       timeout: 2s
       retries: 10
       start_period: 5s
+    networks:
+      default:
+        aliases:
+          - weather-backend
 
   frontend:
     build:

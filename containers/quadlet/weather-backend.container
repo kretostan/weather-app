@@ -6,7 +6,7 @@ Image=ghcr.io/kretostan/weather-app/backend:__IMAGE_SHA__
 ContainerName=weather-backend
 Network=proxy.network
 NetworkAlias=weather-backend
-EnvironmentFile=/opt/apps/weather/backend.env
+EnvironmentFile=/opt/apps/weather-app/backend.env
 
 [Service]
 Restart=always

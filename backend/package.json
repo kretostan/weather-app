@@ -4,7 +4,10 @@
 	"scripts": {
 		"start": "node dist/index.js",
 		"dev": "nodemon src/index.ts",
-		"build": "tsc"
+		"build": "tsc",
+		"biome:lint": "biome lint .",
+		"biome:check": "biome check .",
+		"biome:format": "biome format --write ."
 	},
 	"main": "dist/index.js",
 	"dependencies": {

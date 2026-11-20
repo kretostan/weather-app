@@ -1,0 +1,33 @@
+services:
+  backend:
+    image: ghcr.io/kretostan/weather-app/backend:${IMAGE_SHA?:IMAGE_SHA is required}
+    env_file:
+      - ../backend/.env
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+    expose:
+      - "3000"
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - >-
+          node -e "fetch('http://127.0.0.1:3000/api/health').then(res =>
+            process.exit(res.ok ? 0 : 1)
+          ).catch(() => process.exit(1))"
+      interval: 5s
+      timeout: 2s
+      retries: 10
+      start_period: 5s
+    networks:
+      default:
+        aliases:
+          - weather-backend
+
+  frontend:
+    image: ghcr.io/kretostan/weather-app/frontend:${IMAGE_SHA?:IMAGE_SHA is required}
+    ports:
+      - "8080:80"
+    depends_on:
+      backend:
+        condition: service_healthy

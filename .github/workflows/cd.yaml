@@ -70,7 +70,7 @@ jobs:
           fingerprint: ${{ secrets.SSH_FINGERPRINT }}
           source: "containers/quadlet/*"
           target: ${{ vars.DEPLOY_PATH }}
-          strip-components: 2
+          strip_components: 2
           overwrite: true
 
       - name: Deploy via SSH (Podman)

@@ -1,0 +1,15 @@
+[Unit]
+Description=Weather App Backend
+
+[Container]
+Image=ghcr.io/kretostan/weather-app/backend:__IMAGE_SHA__
+ContainerName=weather-backend
+Network=proxy.network
+NetworkAlias=weather-backend
+EnvironmentFile=/opt/apps/weather/backend.env
+
+[Service]
+Restart=always
+
+[Install]
+WantedBy=default.target

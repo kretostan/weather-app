@@ -1,0 +1,9 @@
+services:
+  frontend:
+    image: ghcr.io/kretostan/weather-app/frontend:${IMAGE_SHA?:IMAGE_SHA is required}
+
+  backend:
+    image: ghcr.io/kretostan/weather-app/backend:${IMAGE_SHA?:IMAGE_SHA is required}
+    env_file: !reset []
+    environment:
+      WEATHER_API_KEY: ci-placeholder

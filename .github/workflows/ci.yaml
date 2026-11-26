@@ -115,6 +115,18 @@ jobs:
           ignor-unfixed: false
           exit-code: 0
 
+      - name: Trivy vulnerability check
+        uses: aquasecurity/trivy-action@0.36.0
+        with:
+          scan-type: "image"
+          image-ref: ghcr.io/${{ github.repository }}/${{ matrix.app }}:${{ github.sha }}
+          format: "table"
+          scanners: "vuln"
+          severity: "HIGH,CRITICAL"
+          ignor-unfixed: true
+          exit-code: 1
+          skip-setup-trivy: true
+
       - name: Push ${{ matrix.app }} image
         run: |
           docker push ghcr.io/${{ github.repository }}/${{ matrix.app }}:${{ github.sha }}

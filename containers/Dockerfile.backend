@@ -1,7 +1,7 @@
 FROM node:25-slim AS deps
 WORKDIR /app
 
-RUN corepack enable
+RUN npm install -g corepack@0.36.0 && corepack enable
 
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 COPY backend/package.json ./backend/package.json
@@ -22,7 +22,7 @@ RUN pnpm build
 FROM node:25-slim AS deps-prod
 WORKDIR /app
 
-RUN corepack enable
+RUN npm install -g corepack@0.36.0 && corepack enable
 
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 COPY backend/package.json ./backend/package.json

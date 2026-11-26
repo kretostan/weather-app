@@ -12,7 +12,7 @@ updates:
     open-pull-requests-limit: 4
     groups:
       npm-updates:
-        pattern:
+        patterns:
           - "*"
 
   - package-ecosystem: "docker"
@@ -26,7 +26,7 @@ updates:
     open-pull-requests-limit: 4
     groups:
       docker-updates:
-        pattern:
+        patterns:
           - "*"
 
   - package-ecosystem: "github-actions"
@@ -40,5 +40,5 @@ updates:
     open-pull-requests-limit: 4
     groups:
       actions-updates:
-        pattern:
+        patterns:
           - "*"

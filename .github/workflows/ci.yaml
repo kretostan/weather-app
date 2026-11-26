@@ -105,25 +105,25 @@ jobs:
           tags: ghcr.io/${{ github.repository }}/${{ matrix.app }}:${{ github.sha }}
 
       - name: Trivy vulnerability report
-        uses: aquasecurity/trivy-action@0.36.0
+        uses: aquasecurity/trivy-action@v0.36.0
         with:
           scan-type: "image"
           image-ref: ghcr.io/${{ github.repository }}/${{ matrix.app }}:${{ github.sha }}
           format: "table"
           scanners: "vuln"
           severity: "HIGH,CRITICAL"
-          ignor-unfixed: false
+          ignore-unfixed: false
           exit-code: 0
 
       - name: Trivy vulnerability check
-        uses: aquasecurity/trivy-action@0.36.0
+        uses: aquasecurity/trivy-action@v0.36.0
         with:
           scan-type: "image"
           image-ref: ghcr.io/${{ github.repository }}/${{ matrix.app }}:${{ github.sha }}
           format: "table"
           scanners: "vuln"
           severity: "HIGH,CRITICAL"
-          ignor-unfixed: true
+          ignore-unfixed: true
           exit-code: 1
           skip-setup-trivy: true
 

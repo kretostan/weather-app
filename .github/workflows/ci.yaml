@@ -26,7 +26,7 @@ jobs:
         uses: actions/checkout@v7
 
       - name: Install pnpm and setup Node.js
-        uses: pnpm/setup@v1
+        uses: pnpm/setup@v3
         with:
           runtime: node@22
           cache: true
@@ -53,7 +53,7 @@ jobs:
         uses: actions/checkout@v7
 
       - name: Install pnpm and setup Node.js
-        uses: pnpm/setup@v1
+        uses: pnpm/setup@v3
         with:
           runtime: node@22
           cache: true
@@ -114,6 +114,18 @@ jobs:
           severity: "HIGH,CRITICAL"
           ignor-unfixed: false
           exit-code: 0
+
+      - name: Trivy vulnerability check
+        uses: aquasecurity/trivy-action@0.36.0
+        with:
+          scan-type: "image"
+          image-ref: ghcr.io/${{ github.repository }}/${{ matrix.app }}:${{ github.sha }}
+          format: "table"
+          scanners: "vuln"
+          severity: "HIGH,CRITICAL"
+          ignor-unfixed: true
+          exit-code: 1
+          skip-setup-trivy: true
 
       - name: Push ${{ matrix.app }} image
         run: |

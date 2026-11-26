@@ -75,14 +75,19 @@ jobs:
 
       - name: Deploy via SSH (Podman)
         uses: appleboy/ssh-action@v1
+        env:
+          IMAGE_SHA: ${{ steps.version.outputs.sha }}
         with:
           host: ${{ vars.VPS_HOST }}
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.SSH_KEY }}
           port: ${{ secrets.VPS_PORT }}
           fingerprint: ${{ secrets.SSH_FINGERPRINT }}
+          envs: IMAGE_SHA
           script: |
             set -eu
+            podman pull ghcr.io/kretostan/weather-app/backend:${IMAGE_SHA}
+            podman pull ghcr.io/kretostan/weather-app/frontend:${IMAGE_SHA}
             systemctl --user daemon-reload
             systemctl --user restart \
               weather-backend.service \

@@ -81,6 +81,7 @@ jobs:
     permissions:
       contents: read
       packages: write
+      security-events: write
 
     steps:
       - name: Check out the code
@@ -109,9 +110,9 @@ jobs:
         with:
           scan-type: "image"
           image-ref: ghcr.io/${{ github.repository }}/${{ matrix.app }}:${{ github.sha }}
-          format: "table"
+          format: "sarif"
+          output: "trivy-report.sarif"
           scanners: "vuln"
-          severity: "HIGH,CRITICAL"
           ignore-unfixed: false
           exit-code: 0
 
@@ -120,9 +121,11 @@ jobs:
         with:
           scan-type: "image"
           image-ref: ghcr.io/${{ github.repository }}/${{ matrix.app }}:${{ github.sha }}
-          format: "table"
+          format: "sarif"
+          output: "trivy-check.sarif"
           scanners: "vuln"
           severity: "HIGH,CRITICAL"
+          limit-severities-for-sarif: true
           ignore-unfixed: true
           exit-code: 1
           skip-setup-trivy: true

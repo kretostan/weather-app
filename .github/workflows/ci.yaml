@@ -116,6 +116,12 @@ jobs:
           ignore-unfixed: false
           exit-code: 0
 
+      - name: Upload Trivy report
+        uses: github/codeql-action/upload-sarif@v4
+        with:
+          sarif_file: "trivy-check.sarif"
+          category: "trivy-${{ matrix.app }}"
+
       - name: Trivy vulnerability check
         uses: aquasecurity/trivy-action@v0.36.0
         with:
